@@ -1,5 +1,5 @@
 function [sim3d_otf] = build_3dsim_otf(paras)
-% unit: nm 
+% unit: nm  
 
 x_pixelNumber = paras(1);
 x_pixelSize = 40;

@@ -5,4 +5,4 @@ rot_back = [cos(phi) -sin(phi) 0; sin(phi) cos(phi) 0; 0 0 1];
 refracted_vector = rot_back*bend*rot*vector;
 end
 
-%% GJM simulates how the objective lens refract light rays 
+%% GJM simulates how the objective lens refract light rays  

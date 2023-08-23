@@ -1,5 +1,5 @@
 function wf_otf = build_wf_otf(paras)
-% unit: nm 
+% unit: nm  
 
 x_pixelNumber = paras(1);
 x_pixelSize = 40;

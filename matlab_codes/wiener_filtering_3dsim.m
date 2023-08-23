@@ -4,7 +4,7 @@ folder_path = '';
 input_file_name = '';
 zSpacing = 100; % 40nm for the beads, 100nm for the myocytes
 exi = 488;
-emi = 532; % 515 for beads, 532 for myocytes 
+emi = 532; % 515 for beads, 532 for myocytes  
 
 
 %% load image stack
