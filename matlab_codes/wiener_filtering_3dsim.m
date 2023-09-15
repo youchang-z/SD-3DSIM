@@ -96,6 +96,8 @@ imshow(squeeze(log10(powerSpec(:,ceil(size(powerSpec,2)/2+0.1),:)))',[]);
 
 
 %% suppress lateral low freq to aviod artifacts
+%% without suppressing, the filtered image may contain speckle noises
+%% these noises are induced by the hard edge of the image boundary
 strip = exp(-(Fx.^2+Fy.^2)/0.0002);
 strip = 1- strip + 1e-1;
 % figure()
@@ -135,6 +137,9 @@ apo = exp(-(Fx.^2+Fy.^2+8*Fz.^2)/4);
 
 %% calculate wiener filter
 w_mtx = (noise_avg./sig_avg)^1.45.*ones(size(image_FD)); 
+% the wiener filtering enhances signals and noises at the same time
+% if the exponent is too small, wiener filtering cannot enhance high frequency signals enough
+% if exponent is too big, wiener filtering will enhance too much high frequency noises
 % 1.7 for beads, 1.45 for myocytes
 % this value should be around 1-2, but the exactly value should be
 % adjusted based on SNR. Lower SNR -> smaller value.
@@ -167,6 +172,9 @@ for i = 1:1:5
     image_restored_FD = fftshift(fftn(fftshift(image_restored)));
 
 %     stepsize = 0.7^(i); % adjusted empirically
+%     by comparing the filtered result with the experimental data, the enhanced noises can be compensated
+%     if the stepsize is too small, the compensation is not enough to correct enhanced noises
+%     if the stepsize is too big, the result image can be over-compensated and still present noises
     image_restored_FD = (image_restored_FD + ...
         stepsize*(image_FD.*signal_mask - image_restored_FD.*otf));
 
